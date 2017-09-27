@@ -1,11 +1,11 @@
 ---
 resources:
-- name: resource-web-app
+- name: resource-web-app-blue-green
   type: git
   source:
-    uri: https://github.com/JellevdK/rws_concourse_demo.git
+    uri: https://github.com/JellevdK/rws_concourse_blue_green.git
 
-- name: resource-deploy-web-app
+- name: resource-deploy-web-app-blue-green
   type: cf
   source:
     api: {{cf-api}}
@@ -15,12 +15,12 @@ resources:
     space: {{cf-space}}
     skip_cert_check: true
 jobs:
-- name: job-deploy-app
+- name: job-deploy-app-blue-green
   serial: true
   plan:
-  - get: resource-web-app
+  - get: resource-web-app-blue-green
     trigger: true
-  - put: resource-deploy-web-app
+  - put: resource-deploy-web-app-blue-green
     params:
-      manifest: resource-web-app/webapp/manifest.yml
-      path: resource-web-app/webapp
+      manifest: resource-web-app-blue-green/webapp-blue-green/manifest.yml
+      path: resource-web-app-blue-green/webapp-blue-green
