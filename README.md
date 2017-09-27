@@ -15,4 +15,3 @@ git push
 ```
 watch the magic happen.
 
-# rws_concourse_blue_green
